@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laporan Bulanan Bagian Bahasa</title>
+<title>Bagian Bahasa TABS 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
@@ -76,7 +76,7 @@ input,select{font-family:inherit; outline:none;}
   box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,122,26,.06);
   animation:popIn .55s cubic-bezier(.16,1,.3,1) both;
 }
-.login-logo{width:52px; height:52px; border-radius:14px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
+.login-logo{width:32px; height:52px; border-radius:14px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
   background:linear-gradient(135deg,var(--orange-500),var(--orange-600)); box-shadow:0 8px 24px var(--orange-glow); font-size:22px; font-weight:800;}
 .login-title{text-align:center; font-size:16px; font-weight:700; letter-spacing:.3px; margin-bottom:2px;}
 .login-sub{text-align:center; font-size:12px; color:var(--text-400); margin-bottom:22px;}
@@ -281,9 +281,11 @@ tr .xl-frozen{box-shadow:2px 0 4px rgba(0,0,0,.05);}
   </div>
   <div class="login-wrap">
     <form class="login-card" id="loginForm" autocomplete="off">
-      <div class="login-logo">آ</div>
-      <div class="login-title">Laporan Bagian Bahasa</div>
-      <div class="login-sub">Penilaian &amp; Pelanggaran Santri</div>
+      <div class="login-logo">
+    <img src="https://i.pinimg.com/736x/ef/ee/93/efee930091ea119cf4bf3be04f8baf60.jpg" alt="Logo" width="45">
+</div>
+      <div class="login-title">Bagian Bahasa TABS 1</div>
+      <div class="login-sub">Berkarya Lillah Taalaa</div>
       <div class="field">
         <label>Email</label>
         <input type="email" id="loginEmail" placeholder="nama@email.com" required>
@@ -305,9 +307,11 @@ tr .xl-frozen{box-shadow:2px 0 4px rgba(0,0,0,.05);}
     <div class="topbar">
       <div class="brand"><span class="dot"></span> Bagian Bahasa</div>
       <div class="nav-tabs" id="navTabs">
-        <button class="nav-tab pressable" data-page="view">Lihat Laporan</button>
+        <button class="nav-tab pressable" data-page="view">Home</button>
         <button class="nav-tab pressable" data-page="dashboard">Dashboard</button>
+	<button class="nav-tab pressable" data-page="Laporkan">Laporkan</button>
         <button class="nav-tab pressable admin-only hidden" data-page="database">Database</button>
+	<button class="nav-tab pressable admin-only hidden" data-page="">Input Laporan</button>
       </div>
       <div class="topbar-right">
         <span class="role-badge" id="roleBadge">VIEWER</span>
@@ -316,7 +320,7 @@ tr .xl-frozen{box-shadow:2px 0 4px rgba(0,0,0,.05);}
           <div class="pname" id="pmName">-</div>
           <div class="pemail" id="pmEmail">-</div>
           <div class="pm-sep"></div>
-          <button class="pm-item pressable" id="pmReset">🔑 Ganti Password</button>
+          <button class="pm-item pressable" id="pmReset">Ganti Password</button>
           <button class="pm-item pressable" id="pmRefresh">⟳ Segarkan Data</button>
           <div class="pm-sep"></div>
           <button class="pm-item danger pressable" id="pmLogout">↪ Keluar</button>
@@ -336,7 +340,7 @@ tr .xl-frozen{box-shadow:2px 0 4px rgba(0,0,0,.05);}
           </div>
         </div>
         <div class="filters-bar">
-          <input type="text" id="searchView" placeholder="🔍 Cari nama santri...">
+          <input type="text" id="searchView" placeholder="Cari nama santri...">
           <select id="filterKelas"><option value="">Semua Kelas</option></select>
           <select id="filterKamar"><option value="">Semua Kamar</option></select>
         </div>
@@ -350,7 +354,7 @@ tr .xl-frozen{box-shadow:2px 0 4px rgba(0,0,0,.05);}
         <div class="empty-state hidden" id="emptyView"><div class="ic">🗂️</div>Tidak ada data yang cocok.</div>
       </div>
 
-      <!-- ===== DASHBOARD PAGE ===== -->
+      <!-- ===== HOME PAGE ===== -->
       <div class="page" id="page-dashboard">
         <div class="view-head"><div class="view-title">Ringkasan <span>Tahunan</span></div></div>
         <div class="stat-strip" id="dashStrip"></div>
@@ -941,5 +945,133 @@ document.addEventListener('keydown', e=>{
   if(e.key==='Enter'){ editCellInline(selectedCell.el); }
 });
 </script>
+/* ================= LAPORAN PAGE (form input laporan bulanan santri) ================= */
+
+#page-laporan{
+  background:radial-gradient(circle at 15% 0%, rgba(255,122,26,.10), transparent 45%), var(--black-900);
+  padding:26px 30px 60px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.lap-card{
+  width:700px;
+  max-width:100%;
+  background:var(--glass-b);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  padding:26px 28px;
+  backdrop-filter:blur(14px);
+}
+
+.lap-row{
+  display:flex;
+  gap:16px;
+}
+
+.lap-field{
+  flex:1;
+  margin-bottom:16px;
+}
+
+.lap-field label{
+  display:block;
+  font-size:11px;
+  color:var(--text-400);
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.lap-select,
+.lap-input,
+.lap-textarea{
+  width:100%;
+  padding:11px 13px;
+  border-radius:10px;
+  background:var(--black-700);
+  border:1px solid var(--glass-border);
+  color:var(--text-100);
+  font-size:13.5px;
+  transition:border .15s, box-shadow .15s;
+}
+
+.lap-select:focus,
+.lap-input:focus,
+.lap-textarea:focus{
+  border-color:var(--orange-500);
+  box-shadow:0 0 0 3px var(--orange-glow);
+}
+
+.lap-textarea{
+  resize:vertical;
+  font-family:inherit;
+  line-height:1.5;
+}
+
+.lap-hint{
+  font-size:11px;
+  color:var(--text-400);
+  margin:-10px 0 16px;
+}
+
+.lap-error{
+  color:var(--danger);
+  font-size:12px;
+  min-height:16px;
+  margin-bottom:8px;
+}
+
+.lap-actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+}
+
+.lap-btn-primary{
+  padding:11px 22px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--orange-500),var(--orange-600));
+  color:#fff;
+  font-weight:600;
+  font-size:13.5px;
+  box-shadow:0 10px 24px var(--orange-glow);
+}
+
+.lap-btn-primary:hover{
+  filter:brightness(1.08);
+}
+
+.lap-btn-primary:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.lap-btn-secondary{
+  padding:11px 22px;
+  border-radius:10px;
+  background:var(--black-700);
+  border:1px solid var(--glass-border);
+  color:var(--text-100);
+  font-weight:600;
+  font-size:13.5px;
+  transition:background .15s;
+}
+
+.lap-btn-secondary:hover{
+  background:var(--black-600);
+}
+
+@media(max-width:900px){
+  #page-laporan{padding:22px 18px 50px;}
+  .lap-card{width:600px;}
+}
+
+@media(max-width:600px){
+  .lap-card{width:100%; padding:20px 18px;}
+  .lap-row{flex-direction:column; gap:0;}
+}
 </body>
 </html>
